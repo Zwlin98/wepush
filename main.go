@@ -1,27 +1,23 @@
 package main
 
 import (
-	"fmt"
 	"log"
-	"zwlinc.com/wepush/core"
+	"zwlinc.com/wepush/application"
+	"zwlinc.com/wepush/config"
 )
 
+
 func main() {
-	var accessToken core.AccessToken
-
-	var cfg core.Config
-
-	err := cfg.Read("./config.json")
+	err := config.AllConfig.Parse("./config.json")
 
 	if err!=nil{
 		log.Fatalln(err)
 	}
 
-	err = accessToken.Get(cfg.CorpId,cfg.CorpSecret)
+	agentId:= config.AllConfig.AgentId
+	user := config.AllConfig.User
 
-	if err!=nil{
-		log.Fatalln(err)
-	}
+	pusher := application.NewPusher(agentId,user)
 
-	fmt.Println(accessToken.Token,accessToken.ExpireTime)
+	err = pusher.PushMessage("测试消息！\nSender by Pusher")
 }

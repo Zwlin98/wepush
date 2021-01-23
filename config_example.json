@@ -1,4 +1,6 @@
 {
   "corpId": "your corpId",
-  "corpSecret":"your corpSecret"
+  "corpSecret":"your corpSecret",
+  "user": "username",
+  "agentId": 12345
 }

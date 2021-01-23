@@ -16,12 +16,14 @@ type AccessToken struct {
 
 }
 
+const apiUrlFormat = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=%s&corpsecret=%s"
+
 func (at *AccessToken) Get(cropId, cropSecret string) error {
 	if !at.Expired(){
 		return nil
 	}
 
-	url := fmt.Sprintf("https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=%s&corpsecret=%s", cropId, cropSecret)
+	url := fmt.Sprintf(apiUrlFormat, cropId, cropSecret)
 	resp, err := http.Get(url)
 	if err != nil {
 		return err
