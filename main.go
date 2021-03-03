@@ -21,6 +21,8 @@ func main() {
 
 	pusher := application.NewPusher(agentId, user)
 	_ = pusher
+
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 
 	router.GET("/wepush", func(c *gin.Context) {
